@@ -125,7 +125,7 @@ last_login  и, если пользователь не заходил более
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/Bugrova-Irina/homework_30.1_drf/
+https://github.com/Bugrova-Irina/coursework_drf/
 ```
 2. Установите зависимости:
 ```
