@@ -15,22 +15,116 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Habit',
+            name="Habit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('to_do', models.CharField(help_text='Укажите, что нужно сделать', max_length=250, verbose_name='Что нужно сделать')),
-                ('place', models.CharField(blank=True, help_text='Укажите место, где нужно сделать', max_length=250, null=True, verbose_name='Место, где нужно сделать')),
-                ('habit_time', models.CharField(blank=True, help_text='Укажите время, когда нужно сделать', max_length=150, null=True, verbose_name='Время, когда нужно сделать')),
-                ('periodicity', models.CharField(choices=[('every_day', 'Каждый день'), ('once_every_2_days', 'Раз в 2 дня'), ('once_every_3_days', 'Раз в 3 дня'), ('once_every_4_days', 'Раз в 4 дня'), ('once_every_5_days', 'Раз в 5 дней'), ('once_every_6_days', 'Раз в 6 дней'), ('once_every_7_days', 'Раз в 7 дней')], default='every_day', help_text='Укажите, как часто нужно делать', max_length=17, verbose_name='Как часто нужно делать')),
-                ('is_nice_habit', models.BooleanField(blank=True, default=False, help_text='Укажите признак привычки', null=True, verbose_name='Признак приятной привычки')),
-                ('reward', models.CharField(blank=True, help_text='Укажите вознаграждение', max_length=250, null=True, verbose_name='Вознаграждение')),
-                ('execution_time', models.PositiveIntegerField(blank=True, default=120, help_text='Укажите время выполнения привычки (не более 120 секунд)', null=True, verbose_name='Время выполнения полезной привычки')),
-                ('general_access', models.BooleanField(blank=True, default=False, help_text='Укажите доступность привычки', null=True, verbose_name='Доступна всем')),
-                ('owner', models.ForeignKey(help_text='Укажите владельца привычки', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Владелец привычки')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "to_do",
+                    models.CharField(
+                        help_text="Укажите, что нужно сделать",
+                        max_length=250,
+                        verbose_name="Что нужно сделать",
+                    ),
+                ),
+                (
+                    "place",
+                    models.CharField(
+                        blank=True,
+                        help_text="Укажите место, где нужно сделать",
+                        max_length=250,
+                        null=True,
+                        verbose_name="Место, где нужно сделать",
+                    ),
+                ),
+                (
+                    "habit_time",
+                    models.CharField(
+                        blank=True,
+                        help_text="Укажите время, когда нужно сделать",
+                        max_length=150,
+                        null=True,
+                        verbose_name="Время, когда нужно сделать",
+                    ),
+                ),
+                (
+                    "periodicity",
+                    models.CharField(
+                        choices=[
+                            ("every_day", "Каждый день"),
+                            ("once_every_2_days", "Раз в 2 дня"),
+                            ("once_every_3_days", "Раз в 3 дня"),
+                            ("once_every_4_days", "Раз в 4 дня"),
+                            ("once_every_5_days", "Раз в 5 дней"),
+                            ("once_every_6_days", "Раз в 6 дней"),
+                            ("once_every_7_days", "Раз в 7 дней"),
+                        ],
+                        default="every_day",
+                        help_text="Укажите, как часто нужно делать",
+                        max_length=17,
+                        verbose_name="Как часто нужно делать",
+                    ),
+                ),
+                (
+                    "is_nice_habit",
+                    models.BooleanField(
+                        blank=True,
+                        default=False,
+                        help_text="Укажите признак привычки",
+                        null=True,
+                        verbose_name="Признак приятной привычки",
+                    ),
+                ),
+                (
+                    "reward",
+                    models.CharField(
+                        blank=True,
+                        help_text="Укажите вознаграждение",
+                        max_length=250,
+                        null=True,
+                        verbose_name="Вознаграждение",
+                    ),
+                ),
+                (
+                    "execution_time",
+                    models.PositiveIntegerField(
+                        blank=True,
+                        default=120,
+                        help_text="Укажите время выполнения привычки (не более 120 секунд)",
+                        null=True,
+                        verbose_name="Время выполнения полезной привычки",
+                    ),
+                ),
+                (
+                    "general_access",
+                    models.BooleanField(
+                        blank=True,
+                        default=False,
+                        help_text="Укажите доступность привычки",
+                        null=True,
+                        verbose_name="Доступна всем",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        help_text="Укажите владельца привычки",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Владелец привычки",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Привычка',
-                'verbose_name_plural': 'Привычки',
+                "verbose_name": "Привычка",
+                "verbose_name_plural": "Привычки",
             },
         ),
     ]
