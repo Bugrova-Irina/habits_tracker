@@ -1,3 +1,5 @@
+from collections.abc import generator
+
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
@@ -25,9 +27,23 @@ class HabitCreateAPIView(CreateAPIView):
 class HabitListAPIView(ListAPIView):
     """Вывод списка привычек"""
 
-    queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = (IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        # Возвращаем привычки только текущего пользователя
+        return Habit.objects.filter(owner=self.request.user)
+
+
+class PublicHabitListAPIView(ListAPIView):
+    """Вывод списка публичных привычек"""
+
+    serializer_class = HabitSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        # Возвращаем список только публичных привычек
+        return Habit.objects.filter(general_access=True)
 
 
 class HabitRetrieveAPIView(RetrieveAPIView):
