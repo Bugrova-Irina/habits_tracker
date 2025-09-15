@@ -71,7 +71,6 @@ class Habit(models.Model):
         help_text="Укажите вознаграждение",
     )
     execution_time = models.PositiveIntegerField(
-        default=120,
         blank=True,
         null=True,
         verbose_name="Время выполнения полезной привычки",
@@ -83,6 +82,14 @@ class Habit(models.Model):
         null=True,
         verbose_name="Доступна всем",
         help_text="Укажите доступность привычки",
+    )
+    related_habit = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Связанная с полезной приятная привычка",
+        help_text="Укажите связанную приятную привычку",
     )
 
     class Meta:

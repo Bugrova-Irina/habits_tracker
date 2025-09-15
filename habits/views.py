@@ -1,5 +1,3 @@
-from collections.abc import generator
-
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
