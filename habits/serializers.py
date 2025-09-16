@@ -15,15 +15,10 @@ class HabitSerializer(serializers.ModelSerializer):
         allow_null=True,
     )
     related_habit = serializers.PrimaryKeyRelatedField(
-        required=False,
-        allow_null=True,
-        queryset=Habit.objects.all()
+        required=False, allow_null=True, queryset=Habit.objects.all()
     )
     execution_time = serializers.IntegerField(
-        required=False,
-        allow_null=True,
-        min_value=1,
-        max_value=120
+        required=False, allow_null=True, min_value=1, max_value=120
     )
 
     class Meta:
@@ -32,22 +27,22 @@ class HabitSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         # Получаем текущие значения из instance, если он существует
-        instance = getattr(self, 'instance', None)
+        instance = getattr(self, "instance", None)
 
         # Для частичных обновлений используем текущие значения полей, если они не переданы
-        is_nice_habit = attrs.get('is_nice_habit')
+        is_nice_habit = attrs.get("is_nice_habit")
         if is_nice_habit is None and instance:
             is_nice_habit = instance.is_nice_habit
 
-        reward = attrs.get('reward')
+        reward = attrs.get("reward")
         if reward is None and instance:
             reward = instance.reward
 
-        related_habit = attrs.get('related_habit')
+        related_habit = attrs.get("related_habit")
         if related_habit is None and instance:
             related_habit = instance.related_habit
 
-        execution_time = attrs.get('execution_time')
+        execution_time = attrs.get("execution_time")
         if execution_time is None and instance:
             execution_time = instance.execution_time
 

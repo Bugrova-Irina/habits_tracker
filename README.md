@@ -70,6 +70,7 @@ celery -A config beat -l info -S django - запуск beat
  - celery
  - django-celery-beat
  - eventlet (для Windows)
+ - requests
 
 В качестве базы данных используется PostgreSQL
 

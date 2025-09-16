@@ -42,12 +42,11 @@ class Habit(models.Model):
         verbose_name="Место, где нужно сделать",
         help_text="Укажите место, где нужно сделать",
     )
-    habit_time = models.CharField(
-        max_length=150,
+    habit_time = models.DateField(
         blank=True,
         null=True,
-        verbose_name="Время, когда нужно сделать",
-        help_text="Укажите время, когда нужно сделать",
+        verbose_name="Дата, когда нужно сделать",
+        help_text="Укажите дату, когда нужно сделать",
     )
     periodicity = models.CharField(
         max_length=17,

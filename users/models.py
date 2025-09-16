@@ -12,7 +12,6 @@ class User(AbstractUser):
         verbose_name="Почта",
         help_text="Укажите почту",
     )
-
     phone = models.CharField(
         max_length=35,
         blank=True,
@@ -20,13 +19,19 @@ class User(AbstractUser):
         verbose_name="Телефон",
         help_text="Укажите телефон",
     )
-
     avatar = models.ImageField(
         upload_to="users/avatars",
         blank=True,
         null=True,
         verbose_name="Аватар",
         help_text="Добавьте аватар",
+    )
+    tg_chat_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Телеграмм chat-id",
+        help_text="Укажите телеграмм chat-id",
     )
 
     # Авторизация по email
