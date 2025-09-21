@@ -1,0 +1,6 @@
+[run]
+omit =
+    users/management/commands/createadmin.py,
+    users/management/commands/export_users.py,
+    habits/services.py,
+    habits/tasks.py
