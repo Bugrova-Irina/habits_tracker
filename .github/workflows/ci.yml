@@ -130,24 +130,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Clean up server disk space
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            set -e
-            echo "Cleaning up disk space..."
-            docker system prune -a -f
-            sudo apt clean
-            sudo apt autoremove -y
-            sudo journalctl --vacuum-time=1d
-            df -h
-          EOF
-
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             set -e
-            sudo systemctl stop coursework_drf.service || true
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/coursework_drf:${{ github.sha }}
-            sudo systemctl start coursework_drf.service
-            sudo systemctl status coursework_drf.service
+            cd /opt/coursework_drf
+            ./deploy.sh
+            echo "Deployment completed successfully!"
           EOF
