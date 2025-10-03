@@ -12,7 +12,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.13-slim'
+          python-version: '3.13'
 
       - name: Install poetry
         uses: snok/install-poetry@v1
@@ -33,6 +33,13 @@ jobs:
     env:
       SECRET_KEY: "dummy-key-for-test"
       DEBUG: "False"
+      NAME: "test_db"
+      USER: "test_user"
+      PASSWORD: "test_password"
+      HOST: "localhost"
+      PORT: "5432"
+      CELERY_BROKER_URL: "redis://localhost:6379/0"
+      CELERY_RESULT_BACKEND: "redis://localhost:6379/0"
 
     steps:
       - name: Check out code
@@ -41,7 +48,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.13-slim'
+          python-version: '3.13'
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -81,7 +88,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
-          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} $${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
+          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
 
       - name: Push Docker image in Docker hub
         run: |
