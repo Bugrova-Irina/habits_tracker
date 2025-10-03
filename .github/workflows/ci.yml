@@ -132,7 +132,7 @@ jobs:
 
       - name: Clean up server disk space
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secret.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             set -e
             echo "Cleaning up disk space..."
             docker system prune -a -f
