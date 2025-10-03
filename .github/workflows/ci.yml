@@ -21,7 +21,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: poetry install ---no-root -no-interaction
 
       - name: Run flake8
         run: poetry run flake8 .
@@ -66,7 +66,7 @@ jobs:
             venv-${{ runner.os }}-
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: poetry install --no-root --no-interaction
 
       - name: Run migrate
         run: poetry run python manage.py migrate
