@@ -134,6 +134,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             set -e
+            echo "Starting deployment process..."
             cd /opt/coursework_drf
             ./deploy.sh
             echo "Deployment completed successfully!"
