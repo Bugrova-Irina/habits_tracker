@@ -56,11 +56,16 @@
 
 В качестве базы данных используется PostgreSQL
 
-## Установка:
+## Локальная установка:
 
 1. Клонируйте репозиторий:
 ```
 https://github.com/Bugrova-Irina/coursework_drf/
+cd coursework_drf
+```
+Запустите все сервисы командой:
+```
+docker-compose up --build
 ```
 2. Установите зависимости:
 ```
@@ -120,6 +125,14 @@ poetry add requests
 ```
 poetry add django-cors-headers
 ```
+Примените миграции:
+```
+python manage.py migrate
+```
+Запустите сервер:
+```
+python manage.py runserver
+```
 
 3. Для работы с отложенными задачами запустите Redis.
 
@@ -130,6 +143,103 @@ poetry add django-cors-headers
 ## Использование:
 
 После запуска сервера перейдите по ссылке http://127.0.0.1:8000/habits/.
+
+## Продакшен развертывание
+После каждого пуша в ветку develop автоматически запускается CI/CD пайплайн:
+1. Тестирование - запуск линтеров и тестов.
+2. Сборка - создание Docker образа.
+3. Деплой - автоматическое обновление на сервере.
+
+### Создайте сервер и настройте SSH доступ.
+
+Добавьте секреты в GitHub (Settings -> Secrets and variables -> Actions):
+
+DOCKER_HUB_USERNAME - ваш логин Docker Hub
+
+DOCKER_HUB_ACCESS_TOKEN - токен Docker Hub
+
+SSH_KEY - приватный SSH ключ для доступа к серверу
+
+SSH_USER - пользователь сервера (например, irina-ubuntu)
+
+SERVER_IP - IP адрес сервера
+
+### Настройте сервер:
+
+#### Создайте директорию проекта
+```
+sudo mkdir -p /opt/coursework_drf
+```
+```
+sudo chown $USER:$USER /opt/coursework_drf
+```
+
+#### Скопируйте файлы проекта
+```
+cp docker-compose.yml nginx.conf deploy.sh /opt/coursework_drf/
+```
+```
+cp .env /opt/coursework_drf/  # создайте .env с настройками
+```
+#### Дайте права на выполнение
+```
+chmod +x /opt/coursework_drf/deploy.sh
+```
+
+## Настройте автозапуск
+
+```
+sudo nano /etc/systemd/system/coursework_drf.service
+```
+
+## Проверка работоспособности
+После деплоя проверьте:
+### На сервере
+```
+cd /opt/coursework_drf
+```
+
+### Статус контейнеров
+```
+docker-compose ps
+```
+### Логи приложения
+```
+docker-compose logs backend
+```
+### Доступность приложения
+```
+curl http://localhost/admin/
+```
+### Управление контейнерами
+#### Запуск
+```
+docker-compose up -d
+```
+#### Остановка
+```
+docker-compose down
+```
+#### Перезапуск
+```
+docker-compose restart
+```
+#### Просмотр логов
+```
+docker-compose logs -f
+```
+
+Продакшен версия доступна по адресу http://158.160.16.66/
+**Если видите ошибку 404:**
+- Это нормально - Django показывает 404 для корневого URL
+- Проверьте другие эндпоинты:
+  - http://158.160.16.66/admin/ - админка Django
+  - http://158.160.16.66/users/login/ - авторизация
+  - http://158.160.16.66/users/register/ - регистрация нового пользователя
+  - http://158.160.16.66/habits/ - функционал привычек (доступен авторизованному 
+  пользователю)
+  - http://158.160.16.66/swagger/ - документация API
+  - http://158.160.16.66/redoc/ - документация API
 
 ## Тестирование:
 
