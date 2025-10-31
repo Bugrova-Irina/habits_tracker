@@ -125,7 +125,7 @@ last_login  и, если пользователь не заходил более
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/Bugrova-Irina/homework_30.1_drf/
+https://github.com/Bugrova-Irina/habits_tracker/
 ```
 2. Установите зависимости:
 ```
