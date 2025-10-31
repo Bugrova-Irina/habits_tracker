@@ -24,6 +24,7 @@ django-celery-beat = "^2.8.1"
 django-cors-headers = "^4.8.0"
 drf-yasg = "^1.21.10"
 coverage = "^7.10.6"
+ipython = "^9.6.0"
 
 
 [build-system]
